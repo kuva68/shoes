@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "kuvashose"
+  },
+  "targets": {
+    "kuvashose": {
+      "hosting": {
+        "kuva": [
+          "kuvashose"
+        ]
+      }
+    }
+  }
+}

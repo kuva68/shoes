@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000005" />
+    <link rel='shortcut icon' href='%PUBLIC_URL%/kuvaLogo.png'>
+    <link rel='mamifest' href='%PUBLIC_URL%/manifest.json'>
+    <meta name='mobile-web-app-capable' content='yes'/>
+    <meta name='apple-mobile-web-app-capable' content='yes'/>
+    
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+   
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <style type='text/css'>
+    
+    @keyframes arrow_left{
+  from {
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(-180deg)
+  }
+}
+@keyframes arrow_right{
+    from{
+        transform: rotate(-180deg)
+    }
+    to{
+        transform: rotate(0deg)
+    }
+}
+@keyframes navBarOpen{
+    from{margin-left: -200vw;
+    }
+    to{margin-left: 0vw;}
+}
+@keyframes formOpen{
+        from {margin-left:3000px;
+              opacity: 0;
+              scale: 0;
+        }
+        to {  margin-left: 0px;
+              opacity: 1;
+              scale: 1;
+              }
+      }    
+      @keyframes formClose{
+        from{margin-left: 0px;
+        }
+        to { margin-left: 3000px;
+        }
+      } 
+.headerLink:active{
+    background-color: #e7e7e7;
+    color:black;
+    
+}
+.headerLink:hover{
+    background-color: #666;
+    color:white;
+}
+.headerLink{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 1vw;
+    top: 1vh;
+    font-size: 2em;
+    line-height: 3em;
+    margin: 1vw;
+    padding: 0px;
+    background-color:black;
+color:white;
+border: 1px #666 solid;
+    border-radius: 10px;
+    font-weight: bolder;
+    height: 7vh;
+    width: 7vw;
+    z-index: 4000;
+    cursor:pointer;
+    transition: all .3s ease-out;
+}
+.active{
+    background-color: #666;
+}
+label{
+    align-items: baseline;
+}
+.headerLinkRight{
+    position:relative;
+    animation:  0.3s linear arrow_right;
+}
+.headerLinkLeft{
+    position: relative;
+    transform: rotate(180deg);
+    animation:  0.3s linear arrow_left;
+   
+}
+.modelBucket{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 90vw;
+    top: 1vh;
+    font-size: 0.7em;
+    line-height: 0.7em;
+       margin: 1vw;
+    padding: opx;
+    background-color:#e7e7e7;
+color:black;
+border: 1px black solid;
+    border-radius: 10px;
+    font-weight: inherit;
+    height: 7vh;
+    width: 7vw;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.modelBucket:hover{
+    color:white;
+    background-color: #666;
+    
+}
+.modelBucket:active{
+    background-color: black;
+    color: white;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2vh;
+    color: #666;
+    
+}
+.siteBody{
+    display: flex;
+    flex-direction: column;
+        
+}
+.contentBody{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+    flex-flow: wrap;
+}
+.imgBody{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 35vw;
+    flex-grow: 0;
+}
+.imgheader{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 5vh;
+    
+    color:red;
+}
+.imgFooter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:black;
+    color:white;
+    font-size: 0.7em;
+    padding: 0px;
+    width: 100%;
+    margin:0px;
+    cursor: pointer;
+    height: 5em;
+    transition: all .3s ease-out;
+}
+.imgN{
+    margin-top: .7em;
+    margin-bottom: .3px;
+}
+.imgFooter:hover{
+    background-color: #e7e7e7;
+    color:black;
+}
+.img{
+    object-fit: cover;
+    width: 100%;
+    margin:0px;
+}
+.imgDiv{
+    width: 100%;
+   
+}
+.navBarOpenWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: fixed;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 100vh;
+    z-index: 3000;    
+    animation:  0.3s linear navBarOpen;
+    margin-left: 0px;
+    background-color: rgba(230, 230, 230,0.7 )
+}
+
+.navBarCloseWrapper{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    top:0px;
+    left:-150vw;
+    width: 100%;
+    height: 100vh;
+    font-size: 0.7em;
+    line-height: 2em;
+    transition: .3s linear all; 
+    margin-left: 0px;
+    
+}
+.oderedModelDel{
+    box-shadow: 6px 6px 10px #666,
+                -6px -6px 10px rgb(221, 220, 250)  ;
+    transition:  .3s linear all;        
+                
+
+}
+.oderedModelDel:active{
+    box-shadow: 3px 3px 3px #555555,
+                -3px -3px 3px rgb(248,5,5)  ;
+}
+.oderedModelDel:hover{
+    box-shadow: 8px 8px 18px #555555,
+                -6px -6px 16px rgb(248, 5, 5)  ;
+                color:rgb(248,5,5);
+}
+    .navBarOpen{
+        display:flex;
+        flex-direction: column;
+        width: 60vw;
+        margin-top:12vh;
+        flex-grow: 0;
+        justify-content: flex-start;
+        align-items: center;
+        height: 90vh;
+        background-color: black;
+    }  
+    .formOderTopContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 20vw;
+    width:100%;
+}
+
+
+.navBarLi{
+    background-color: black;
+    color: white;
+    width:100%;
+    z-index: 4000;
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+    text-decoration: none;
+    padding: 2vw;
+    flex-grow: 1;
+    font-size: 0.7em;
+    height: 10vh;
+    box-sizing: border-box;
+    transition: all .3s ease;
+}
+.navBarLi:hover{
+    background-color: #666;
+}
+.collectionNameDiv:hover{
+    background-color: #666666;
+}
+.collectionNameDiv:active{
+    background-color: #e7e7e7;
+    color: black;
+}
+.active{
+    background-color: #e7e7e7;
+    color: black;
+}
+ .navlink{
+    text-decoration: none;
+    width: 100%;
+}
+.collectionNameDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: 
+white;
+background-color:
+    black;
+    width: 40vw;
+    height: 10vh;
+    margin-top:5vh;
+    transition: all .3s linear;
+}
+.confirmButton{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+       text-align: center;
+       font-size: 2em;
+       line-height: 3em;
+       border: 1px solid black;
+       border-radius: 5px;
+       transition: all .3s ease-in;
+       color:white;
+       height: 10vh;
+       width: 20vw;
+       background-color: black;
+     }
+  .confirmButton:active{
+    background-color: azure;
+  }   
+  .confirmButton:hover{
+    text-decoration: underline;
+    color: #666666;
+  }
+    .confirmBody{
+      display:flex;
+      flex-direction: column;
+      margin: 5vw;
+      z-index: 2000;
+      width: 90vw;
+      overflow: auto;
+      background-color: #e7e7e7;
+    }  
+     .confirmClose{
+      display: none;
+      animation:formClose 0.3s;
+    }
+    .confirmOpen{
+      display:flex;;
+      flex-direction: column;
+      position: fixed;
+      top:0px;
+      left: 0px;
+      width:100vw;
+      height: 100vh;
+      overflow: auto;
+      animation:formOpen 0.3s;
+      z-index: 2000;
+      background-color: #e7e7e7;
+          }
+.formDiv{
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    animation: formOpen .3s linear;
+}
+.formBody{
+    margin-top:5vh;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    box-sizing: border-box;
+    
+    width: 85vw;
+    background-color: #e7e7e7;
+}
+.formFooter{
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2vw;
+}
+.formButton{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: black;
+    margin: 5px 5vw;
+    width: 20vw;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+    transition: all .3s linear;
+}
+
+.input{
+    font-size: 0.8em;
+    transition: all .2s linear;
+}
+label{
+    display:flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 90%;
+    
+    align-items: baseline;
+}
+.formFildSet1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85vw;
+    border: 1px solid #666;
+    box-sizing: border-box;
+    justify-content: center;
+    background-color: #e7e7e7;
+}
+.formOderedImgAndSizeSelects{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.oderedmodelImg{
+    
+    width: 15vw;
+   }
+.formDiv1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    text-align: center;
+}
+.sizeSelect{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5vw;
+    width: 5vw;
+    font-size: 0.7em;
+    
+}
+.select{
+    font-size: 0.7em;
+    height:2em;
+    transition: all .2s ease-in;
+}
+.oderedModelFooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+     width: 100%;
+    list-style: none;
+    align-items: center;
+    
+}
+.oderedModelTitle{
+    display: flex;
+    justify-content: center;
+    max-width: 60vw;
+    margin: 2vw auto;
+    font-size: .7em;
+
+}
+.oderedModelDel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    width: 30vw;
+    margin: 2vw auto;
+    font-size: 0.7em;
+    height: 3em;
+}
+.formButton {
+    display: flex;
+    flex-direction: column;
+    color: 
+white;
+background-color:
+black;
+margin: 5px 5vw;
+width: 20vw;
+justify-content: center;
+align-items: center;
+font-size: 0.7em;
+cursor: pointer;
+transition: all .3s ease-in-out;
+}
+.oderedModelLi{
+    margin-left: 4vw;
+}
+.confirmOpen{
+    display:flex;
+    flex-direction: column;
+    background-color: #e7e7e7;
+    align-content: center;
+    
+    
+}
+.formButton:hover{
+    background-color: #666;
+}
+.formButton:active{
+    background-color: #e7e7e7;
+    color:white;
+}
+.AlertoderedModelComponent{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2vw;
+}
+.confirmImg{
+    width: 15vw;
+}
+.oderedModelTitel{
+    font-size: 0.7em;
+    text-align: center;
+    width: 35vw;
+}
+.oderedModelSizesTable{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 40vw;
+    font-size: 2vw;
+    justify-content: space-around
+    
+}
+.oderedModelsizeControl{
+    direction: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    border: 1px #666 solid;
+    width: 3vw;
+    text-align: center;
+    height: 9vw;
+    margin: .5vw;
+    padding: 0px;
+    
+}
+.confirmFooter{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 3vw;
+}
+.confirmButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    width: 20vw;
+    border-radius: 5px;
+    font-size: 0.7em;
+    height: 5vw;
+    cursor: pointer;
+    transition: all .3s linear;
+}
+.confirmButton:hover{
+    background-color: #666;
+    color:white;
+}
+.confirmButton:active{
+    background-color: #e7e7e7;
+    color:black;
+}
+@media(max-width:601px){
+        .headerLink{
+    font-size: 4vw;
+    line-height: 5vw;
+    margin: 1vw;
+    height: 10vw;
+    width: 15vw;
+    z-index: 4000;
+    cursor:pointer;
+}
+.formOderTopContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    height: 40vw;
+
+}
+.modelBucket{
+    left: 82vw;
+    font-size: 3vw;
+    line-height: 3vw;
+    margin: 1vw;
+    height: 10vw;
+    width: 15vw;
+    cursor: pointer;
+}
+
+        .navBarOpen{
+        width: 100vw;
+        margin-top:14vw;
+        flex-grow: 0;
+        height: 90vh;
+        
+        }
+        .navBarLi{
+    width:100%;
+    padding: 2vw;
+    font-size: 5vw;
+    height: 8vh;
+    box-sizing: border-box;
+}
+ .modelBucket{
+     font-size: 5vw;
+     width:15vw;
+ }
+ .formButton{
+     width: 40vw;
+ }
+    } 
+
+
+@media (max-width:500px){
+   .formOderedImgAndSizeSelects{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 3vw;
+}
+.oderedModelTitle p{
+    font-size: 1em;
+}
+.oderedModelsizeControl {
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px #666 solid;
+    
+    text-align: center;
+    height: 9vw;
+    margin: 1vw;
+    padding: 0px;
+    
+    width: 7vw;
+}
+.oderedModelSizesTable {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70vw;
+    font-size: .5em;
+    justify-content: space-around;
+}
+.confirmButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    width: 30vw;
+    border-radius: 5px;
+    font-size: 0.7em;
+    height: 10vw;
+    cursor: pointer;
+    transition: all .3s linear;
+}
+.oderedModelsizeControl p{
+    margin: 0px;
+    text-align: center;
+}
+.oderedModelTitel {
+    font-size: 1em;
+    text-align: center;
+    width: 80vw;
+}
+.AlertoderedModelComponent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2vw;
+    box-shadow: 5px 5px 10px black;
+}
+h3{
+    font-size: .9em;
+}
+label{
+    display:flex;
+    flex-direction: column;
+    
+    width: 45%;
+    justify-content: center;
+    align-items: baseline;
+}
+.oderedModelDel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    width: 30vw;
+    margin: 5px auto;
+    font-size: .7em;
+    height: 2em;
+}
+.sizeSelect{
+    width: 3em;
+}
+.sizeSelect p{
+    margin:5px auto 2px auto;
+    text-align: center;
+}
+.oderedModelFooter{
+    display: flex;
+    flex-direction: column;
+    margin:0px;
+     width: 100%;
+    list-style: none;
+    align-items: center;
+    
+}
+.oderedModelFooter p{
+    
+    text-align: center;
+    margin:5px 10px;
+}
+
+    .imgBody{
+        width: 70vw;
+    }
+    
+    .siteBody{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }   
+
+ .formDiv1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    text-align: center;
+    box-sizing: border-box;
+}
+ .oderedModelTitle{
+     width: 100%;
+     margin: 2vw;
+ }
+ .select{
+     width: 11vw;
+     font-size: 1em;
+ }
+ .formOderTopContainer{
+     display: flex;
+     flex-direction: column;
+     justify-content: start;
+     align-items: center;
+ }
+}
+@media (max-widht:500px){
+    .input{
+        font-size: 0.7em;
+    }
+   .formOderTopContainer{
+       height: 40vw;
+   } 
+}
+
+ </style>
+    <title>KUVA взуття зроблено в УКРАIHI
+    </title>
+      
+     </head>
+     <meta name="google-site-verification" content="b9xTqx3vUiL27txikkgfiRu9kT0U_T9oZ4LQOY-w6qI" />
+  <body>
+     <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+/?utm_source=homescreen
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+  </body>
+</html>
