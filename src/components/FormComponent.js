@@ -58,7 +58,7 @@ let ModelsObj
 let bucketKeys
 if(props.bucket&&Object.keys(props.bucket)){
   bucketKeys = Object.keys(props.bucket)
- ModelsObj = bucketKeys.map((el)=>{
+  ModelsObj = bucketKeys.map((el)=>{
     return <OderedModel imgName={el}imgPath={props.bucket[el].imgPath}
     sizes={props.bucket[el].sizes}
            sizeMessage={sizeMessage}key={el}delModel={delModel}/>

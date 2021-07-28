@@ -8,8 +8,7 @@ export default function ModelBucket(props){
   return  <NavLink to='/FormComponent'activeStyle={
       {display:'none'}}>
    <div className='modelBucket'>
-        <p style={{textAlign:'center',
-    margin:'5px'}}>{count}</p>
+        <p className='modelBucketP'>{count}</p>
                <p>_🛒</p>
     </div>
 </NavLink>
