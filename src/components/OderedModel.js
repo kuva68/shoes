@@ -19,7 +19,10 @@ export const OderedModel = (props) => {
 
   return <div className='formModelDiv'>
     <div className='formFildSet1'>
-      <h4 style={{ textAlign: 'center' }}>Выберите размеры</h4>
+      <div>
+       <h4 style={{ textAlign: 'center' }}>Выберите размеры</h4>
+      </div>
+      
       <div className='formOderedImgAndSizeSelects'>
         <div className='formOderTopContainer'>
           <img className='oderedmodelImg' alt='KUVA' src={props.imgPath} />

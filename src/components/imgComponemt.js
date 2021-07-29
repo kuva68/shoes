@@ -64,7 +64,7 @@ function ImgComponent(props) {
         <div className='imgFooter' onClick={
             ()=>props.dispatch({type:'SET_POP_OPEN',anchorEl:imgRef.current,popImgUrl:props.option.url,popImgName:props.name})}>
             <p className='imgN'>{props.option.name.slice(0, -4)}</p>
-            <p classname='imgN' style={{color:'black'}}>Добавить в корзину</p> 
+            
         </div>
      </div>
      

@@ -6,7 +6,7 @@ const AlertOderedModelComponent = (props) => {
     return <div className='AlertoderedModelComponent'>
         <img src={props.path}
             className='confirmImg' alt='KUVA' />
-        <div className='oderedModelTitel'>{props.el}</div>
+        <div className='oderedModelTitel'>{props.el.replace('png','')}</div>
         <div className='oderedModelSizesTable'>
             {Object.keys(props.sizes).map((elm) => {
                 return <div className='oderedModelsizeControl' key={elm}
