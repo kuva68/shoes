@@ -68,6 +68,9 @@
     color:black;
     
 }
+p{
+    font-size: .8rem;
+}
 .headerLink:hover{
     background-color: #666;
     color:white;
@@ -78,22 +81,22 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    left: 1vw;
-    top: 1vh;
-    font-size: 2em;
-    line-height: 3em;
-    margin: 1vw;
+    left: 1.5rem;
+    top: 1.5rem;
+    font-size: 3rem;
+    line-height: 4rem;
     padding: 0px;
     background-color:black;
-color:white;
-border: 1px #666 solid;
+    color:white;
+    border: 1px #e7e7e7 solid;
     border-radius: 10px;
     font-weight: bolder;
-    height: 7vh;
-    width: 7vw;
+    height: 3rem;
+    width: 4.5rem;
     z-index: 4000;
     cursor:pointer;
     transition: all .3s ease-out;
+    box-shadow: 6px 6px 10px #666, -6px -6px 10px rgb(221 220 250);
 }
 .active{
     background-color: #666;
@@ -101,15 +104,21 @@ border: 1px #666 solid;
 label{
     align-items: baseline;
 }
+.headerLinkStart{
+    position:relative;
+    
+    font-size: 2rem;
+}
 .headerLinkRight{
     position:relative;
     animation:  0.3s linear arrow_right;
+    font-size: 2rem;
 }
 .headerLinkLeft{
     position: relative;
     transform: rotate(180deg);
     animation:  0.3s linear arrow_left;
-   
+    font-size: 2rem;
 }
 .modelBucket{
     display: flex;
@@ -117,30 +126,59 @@ label{
     justify-content: center;
     align-items: center;
     position: fixed;
-    left: 90vw;
-    top: 1vh;
-    font-size: 0.7em;
-    line-height: 0.7em;
-       margin: 1vw;
-    padding: opx;
+    right: 1.5rem;
+    top: 1.5rem;
+    padding: 0px;
     background-color:#e7e7e7;
-color:black;
-border: 1px black solid;
+    color:black;
+    border: 1px black solid;
     border-radius: 10px;
     font-weight: inherit;
-    height: 7vh;
-    width: 7vw;
+    height: 3rem;
+    width: 4.5rem;
     cursor: pointer;
     transition: all .3s ease-in-out;
+    font-size: 1.5rem;
+    color: #666;
+    z-index: 4000;
+    box-shadow: 6px 6px 10px #666, -6px -6px 10px rgb(221 220 250);
 }
+
+
+
 .modelBucket:hover{
     color:white;
     background-color: #666;
     
 }
+
 .modelBucket:active{
     background-color: black;
     color: white;
+}
+.howToOrder {
+    padding: 10vh 5vw;
+    width: 70vw;
+    background-color: rgb(231, 231, 231);
+    color: rgb(102, 102, 102);
+    border-radius: 10px;
+    place-self: center;
+    display: flex;
+    flex-direction: column;
+    font-weight: 100;
+}
+
+.roundImg {
+    border-radius: 50%;
+    background-image: url('./визон зш,,,28,5$.png');
+    background-repeat: no-repeat;
+    width: 15vw;
+    height: 15vw;
+    background-position: center center;
+    background-color: white;
+    background-size: cover;
+    /* z-index: 1; */
+    align-self: center;
 }
 .header{
     display: flex;
@@ -160,23 +198,29 @@ border: 1px black solid;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    
+    margin-inline: 7rem;
     flex-flow: wrap;
+    row-gap: 2rem;
 }
 .imgBody{
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 35vw;
+    width: 11rem;
+    height: 20rem;
     flex-grow: 0;
+    overflow: hidden;
+    transition: all 0.3s linear;
+    position: relative;
 }
+
 .imgheader{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 5vh;
+    height: 10%;
     
     color:red;
 }
@@ -192,7 +236,7 @@ border: 1px black solid;
     width: 100%;
     margin:0px;
     cursor: pointer;
-    height: 5em;
+    height: 20%;
     transition: all .3s ease-out;
 }
 .imgN{
@@ -210,6 +254,7 @@ border: 1px black solid;
 }
 .imgDiv{
     width: 100%;
+    height: 70%;
    
 }
 .navBarOpenWrapper{
@@ -235,14 +280,13 @@ border: 1px black solid;
     justify-content: flex-start;
     align-items: flex-start;
     top:0px;
-    left:-150vw;
+    left:0px;
     width: 100%;
     height: 100vh;
-    font-size: 0.7em;
-    line-height: 2em;
     transition: .3s linear all; 
     margin-left: 0px;
-    
+    overflow: hidden;
+    backdrop-filter: blur(5px);
 }
 .oderedModelDel{
     box-shadow: 6px 6px 10px #666,
@@ -264,26 +308,29 @@ border: 1px black solid;
         display:flex;
         flex-direction: column;
         width: 60vw;
-        margin-top:12vh;
+        margin-top: 7rem;;
         flex-grow: 0;
         justify-content: flex-start;
-        align-items: center;
+        align-items: stretch;
         height: 90vh;
+        border-top-right-radius: 1rem;
+        overflow: hidden;
         background-color: black;
     }  
     .formOderTopContainer{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    height: 20vw;
+    height: 10rem;
     width:100%;
 }
-
-
-.navBarLi{
+.formModelDiv{
+    width: 100%;
+}
+.navlink{
     background-color: black;
-    color: white;
+    color: #e7e7e7;
     width:100%;
     z-index: 4000;
     border-bottom: 1px solid white;
@@ -292,16 +339,34 @@ border: 1px black solid;
     align-items: center;
     cursor:pointer;
     text-decoration: none;
-    padding: 2vw;
-    flex-grow: 1;
-    font-size: 0.7em;
-    height: 10vh;
+    padding: 0.5rem;
+    flex-grow: 0;
+    font-size: 1.2rem;
+    height: 4rem;
     box-sizing: border-box;
-    transition: all .3s ease;
+    
 }
-.navBarLi:hover{
+.active{
+    background-color: #e7e7e7;
+    color: black;
+}
+
+.navlink:hover{
     background-color: #666;
 }
+.navBarLi{
+    width:100%;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-grow: 0;
+    height: 4rem;
+    box-sizing: border-box;
+    transition: all .3s ease;
+   
+}
+
+
 .collectionNameDiv:hover{
     background-color: #666666;
 }
@@ -309,14 +374,8 @@ border: 1px black solid;
     background-color: #e7e7e7;
     color: black;
 }
-.active{
-    background-color: #e7e7e7;
-    color: black;
-}
- .navlink{
-    text-decoration: none;
-    width: 100%;
-}
+
+ 
 .collectionNameDiv {
     display: flex;
     justify-content: center;
@@ -385,16 +444,18 @@ background-color:
     align-items: center;
     color: #666;
     animation: formOpen .3s linear;
+    width: 100%;
 }
 .formBody{
     margin-top:5vh;
+    margin-bottom: 2rem;
     display:flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
     box-sizing: border-box;
-    
-    width: 85vw;
+    flex-wrap: wrap;
+    width: 100%;
     background-color: #e7e7e7;
 }
 .formFooter{
@@ -420,20 +481,21 @@ background-color:
 .input{
     font-size: 0.8em;
     transition: all .2s linear;
+    margin: 5px;
+    margin-left: 1rem;
+    width: 15rem;
 }
 label{
     display:flex;
     flex-direction: row;
     justify-content: start;
-    width: 90%;
-    
     align-items: baseline;
 }
 .formFildSet1{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 85vw;
+    width: 100%;
     border: 1px solid #666;
     box-sizing: border-box;
     justify-content: center;
@@ -443,19 +505,17 @@ label{
     display: flex;
     width: 100%;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
+   
 }
 .oderedmodelImg{
     
-    width: 15vw;
+   max-height: 100%;
    }
 .formDiv1{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 60%;
     text-align: center;
 }
 .sizeSelect{
@@ -469,7 +529,7 @@ label{
     
 }
 .select{
-    font-size: 0.7em;
+    font-size: 1rem;
     height:2em;
     transition: all .2s ease-in;
 }
@@ -504,18 +564,19 @@ label{
 .formButton {
     display: flex;
     flex-direction: column;
-    color: 
-white;
-background-color:
-black;
-margin: 5px 5vw;
-width: 20vw;
-justify-content: center;
-align-items: center;
-font-size: 0.7em;
-cursor: pointer;
-transition: all .3s ease-in-out;
+    color:white;
+    background-color:black;
+    margin: 5px 5vw;
+    width: 20vw;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    box-shadow: 6px 6px 10px #666, -6px -6px 10px rgb(221 220 250);
+    border-radius: 2px;
 }
+
 .oderedModelLi{
     margin-left: 4vw;
 }
@@ -600,51 +661,36 @@ transition: all .3s ease-in-out;
     color:black;
 }
 @media(max-width:601px){
-        .headerLink{
-    font-size: 4vw;
-    line-height: 5vw;
-    margin: 1vw;
-    height: 10vw;
-    width: 15vw;
+.headerLink{
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    height: 3rem;
+    width: 4.5rem;
     z-index: 4000;
     cursor:pointer;
 }
-.formOderTopContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-    height: 40vw;
+.formBody{
+    width: 100%;
+    padding-inline: 0px;
 
 }
-.modelBucket{
-    left: 82vw;
-    font-size: 3vw;
-    line-height: 3vw;
-    margin: 1vw;
-    height: 10vw;
-    width: 15vw;
-    cursor: pointer;
-}
 
+.contentBody{
+    margin-inline: 0.4rem;
+}
         .navBarOpen{
         width: 100vw;
-        margin-top:14vw;
+        margin-top: 5rem;
         flex-grow: 0;
         height: 90vh;
-        
+        overflow: hidden;
         }
         .navBarLi{
     width:100%;
-    padding: 2vw;
-    font-size: 5vw;
-    height: 8vh;
+    height: 4rem;
     box-sizing: border-box;
 }
- .modelBucket{
-     font-size: 5vw;
-     width:15vw;
- }
+ 
  .formButton{
      width: 40vw;
  }
@@ -718,13 +764,9 @@ transition: all .3s ease-in-out;
 h3{
     font-size: .9em;
 }
-label{
-    display:flex;
-    flex-direction: column;
-    
-    width: 45%;
-    justify-content: center;
-    align-items: baseline;
+.input{
+    margin: 5px;
+    width: 8rem;
 }
 .oderedModelDel{
     display: flex;
@@ -760,7 +802,8 @@ label{
 }
 
     .imgBody{
-        width: 70vw;
+        width: 8rem;
+        height: 16rem;
     }
     
     .siteBody{
@@ -775,7 +818,7 @@ label{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 80%;
+    
     text-align: center;
     box-sizing: border-box;
 }
@@ -784,8 +827,8 @@ label{
      margin: 2vw;
  }
  .select{
-     width: 11vw;
-     font-size: 1em;
+     width: 2rem;
+     font-size: 0.8rem;
  }
  .formOderTopContainer{
      display: flex;
@@ -793,14 +836,18 @@ label{
      justify-content: start;
      align-items: center;
  }
+ 
+.navBarCloseWrapper{
+    padding-top:0.8rem
+}
 }
 @media (max-widht:500px){
     .input{
         font-size: 0.7em;
+        width: 8rem;
+        margin-top: 10px;
     }
-   .formOderTopContainer{
-       height: 40vw;
-   } 
+   
 }
 
  </style>

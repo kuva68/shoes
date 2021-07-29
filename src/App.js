@@ -1,9 +1,9 @@
 import React from 'react'
-import { useState, useEffect} from 'react'
-import {connect,useDispatch} from 'react-redux'
-import {Route} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { Route } from 'react-router-dom'
 import Confirm from './components/Confirm'
-import  firebase from './firebase/klient'
+import firebase from './firebase/klient'
 import FormComponent from './components/FormComponent'
 import Header from './components/Header'
 import NavBar from './components/NavBar'
@@ -13,82 +13,89 @@ import Home from './Home'
 import New from './New'
 import ModelBucket from './components/ModelBucket'
 import NavBarButton from './components/NavBarButton'
-
-
-
+import Modal from '@material-ui/core/Modal';
+import ImgPopover from './components/img_popover'
+import { makeStyles } from '@material-ui/styles';
 const db = firebase.firestore()
 //const messaging = firebase.messaging()
 
 //messaging.usePublicVapidKey('BJc_FqFXOGR_dfvDXglS98-Ya9X5ZBzhaUH7GD7tdXTZdGVNsPxcwdulNFW_TjMju4l3hCRSy4an_vUOkSQTsnc')
-
+const styles = makeStyles({
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
 
 function Kuva(props) {
+  const classes = styles()
   //console.log(firebase)
   const dispatch = useDispatch()
   const [namberOfClass, setClass] = useState(0)
-  let {name,phoneNumber} = props.order
+  let { name, phoneNumber } = props.order
   let bucket = props.bucket
-  const [send,setSend] = useState(false)
+  const [send, setSend] = useState(false)
   useEffect(() => {
     firebase.auth().signInAnonymously().catch((error) => {
       console.log(error)
     })
   }, [])
-  useEffect(()=>{
-  async function sendMessage() {
+  useEffect(() => {
+    async function sendMessage() {
 
-    try {
-      let messageToken =
-        localStorage.getItem('messageToken')
-      if (!messageToken) {
-        messageToken = ''
-      }
-      let nregEx = /[^a-z,A-Z,А-Я,а-я,\s]/gi
-      let regexName = name.replace(nregEx, 0)
-      let phone =phoneNumber
-      let d = new Date().toLocaleString()
-      let nowD = Date.now()
-      
-      await db.collection('messages').doc(d)
-        .set({
-          name: regexName,
-          bucket: bucket,
-          phone: phone,
-          token: messageToken,
-          date: nowD,
-          status: 0
+      try {
+        let messageToken =
+          localStorage.getItem('messageToken')
+        if (!messageToken) {
+          messageToken = ''
+        }
+        let nregEx = /[^a-z,A-Z,А-Я,а-я,\s]/gi
+        let regexName = name.replace(nregEx, 0)
+        let phone = phoneNumber
+        let d = new Date().toLocaleString()
+        let nowD = Date.now()
+
+        await db.collection('messages').doc(d)
+          .set({
+            name: regexName,
+            bucket: bucket,
+            phone: phone,
+            token: messageToken,
+            date: nowD,
+            status: 0
+          })
+
+        dispatch({
+          type: 'clear_bucket'
         })
-
         dispatch({
-        type: 'clear_bucket'
-      })
-        dispatch({
-        type: 'change_alert',
-        alert: 'confirmClose'
-      })
-      document.body.style.overflow = 'auto'
-      window.history.go(-1)
-      setSend(false)
-    } catch (error) {
-      console.log(error)
+          type: 'change_alert',
+          alert: 'confirmClose'
+        })
+        document.body.style.overflow = 'auto'
+        window.history.go(-1)
+        setSend(false)
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }
-  send&&sendMessage()
-},[send,name,phoneNumber,bucket]
-)
+    send && sendMessage()
+  }, [send, name, phoneNumber, bucket]
+  )
   //console.log(props)
-  
+
   const toggleClass = () => {
-    
+
     namberOfClass === 2 ? setClass(1) : setClass(2)
-    
+
   }
 
   useEffect(() => {
     function getImgObj() {
       console.log('getImgObj start')
       if (!window.navigator.onLine) {
-       // console.log('offline')
+        // console.log('offline')
         window.addEventListener('online', makeImgObj)
       } else {
         //console.log('online')
@@ -118,7 +125,7 @@ function Kuva(props) {
     }
     async function implementFetching(imgO) {
       try {
-       // console.log('implementFetching start', imgO)
+        // console.log('implementFetching start', imgO)
 
         if (imgO && Object.keys(imgO)) {
           let collectionsList = Object.keys(imgO).sort((a, b) => {
@@ -126,7 +133,7 @@ function Kuva(props) {
           })
 
           //console.log('imgObject',Object.keys(imgO))
-           dispatch({
+          dispatch({
             type: 'img_obj',
             obj: imgO,
             arr: collectionsList
@@ -142,68 +149,68 @@ function Kuva(props) {
       }
     }
     getImgObj()
-    return ()=>window.removeEventListener('online', makeImgObj)
+    return () => window.removeEventListener('online', makeImgObj)
   }, [])
   useEffect(() => {
-   // async function checkMessaging() {
+    // async function checkMessaging() {
 
-     // let messageToken =
-       // localStorage.getItem('messageToken')
-      //if (messageToken) {
-        //let d = new Date()
-        //await db.collection('tokens').doc('Token').update({
-          //[messageToken]: d
-        //})
-      //}
-      //if (!messageToken) {
-        //await startMessaging()
-     // }
+    // let messageToken =
+    // localStorage.getItem('messageToken')
+    //if (messageToken) {
+    //let d = new Date()
+    //await db.collection('tokens').doc('Token').update({
+    //[messageToken]: d
+    //})
+    //}
+    //if (!messageToken) {
+    //await startMessaging()
+    // }
 
-      
-      //messaging.onTokenRefresh(() =>
-       // messaging.getToken().then((refreshedToken) => {
-         
-          //localStorage.setItem('messageToken', refreshedToken)
-          
-         // let d = new Date();
-          //db.collection('tokens').doc('Token').update({
-           // [refreshedToken]: d
-         // })
-          //console.log('token in db')
-       // })
-       // .catch((err) => {
-         // console.log('Unable to retrieve refreshed token ', err);
-        //})
-      //);
+
+    //messaging.onTokenRefresh(() =>
+    // messaging.getToken().then((refreshedToken) => {
+
+    //localStorage.setItem('messageToken', refreshedToken)
+
+    // let d = new Date();
+    //db.collection('tokens').doc('Token').update({
+    // [refreshedToken]: d
+    // })
+    //console.log('token in db')
+    // })
+    // .catch((err) => {
+    // console.log('Unable to retrieve refreshed token ', err);
+    //})
+    //);
     //}
-   // async function startMessaging() {
-      
-     // try {
-           
-        //let permission = await Notification.requestPermission()
-        //if (permission === 'granted') {
-          
-          //let token = await messaging.getToken()
-          //if (!token || token === null) console.log('no token')
-          //if (token) {
-           // await localStorage.setItem('messageToken', token)
-            //console.log('token in l.storage')
-            //let d = new Date()
-            //await db.collection('tokens').doc('Token').update({
-             // [token]: d
-            //})
-           
-         // } else {
-           // console.log('Unable to get permission to notify.')
-          //}
-        //}
-      //} catch (error) {
-       // console.log(error)
-      //}
+    // async function startMessaging() {
+
+    // try {
+
+    //let permission = await Notification.requestPermission()
+    //if (permission === 'granted') {
+
+    //let token = await messaging.getToken()
+    //if (!token || token === null) console.log('no token')
+    //if (token) {
+    // await localStorage.setItem('messageToken', token)
+    //console.log('token in l.storage')
+    //let d = new Date()
+    //await db.collection('tokens').doc('Token').update({
+    // [token]: d
+    //})
+
+    // } else {
+    // console.log('Unable to get permission to notify.')
     //}
-   // checkMessaging()
+    //}
+    //} catch (error) {
+    // console.log(error)
+    //}
+    //}
+    // checkMessaging()
   }, [])
-  const sendComplit = ()=>{
+  const sendComplit = () => {
     setSend(true)
   }
 
@@ -214,37 +221,49 @@ function Kuva(props) {
     namberOfClass === 2 ? document.body.style.overflow = 'hidden' :
       document.body.style.overflow = ''
   }, [namberOfClass])
+  const { popOpen, anchorEl } = props
+  return <div className='main' title='Кува взуття оптом Kuva' >
+    <NavBarButton toggleClass={toggleClass} namberOfClass={namberOfClass} />
+    < ModelBucket bucket={props.bucket} />
+    <Modal className={classes.modal}
+      open={popOpen}
 
-  return <div className = 'main' title = 'Кува взуття оптом Kuva' >
-    <NavBarButton toggleClass = {toggleClass } namberOfClass = {namberOfClass } /> 
-    < ModelBucket bucket = { props.bucket }/>
-     < Header toggleClass = {toggleClass}  namberOfClass = { namberOfClass }
-    bucket = { props.bucket } />
+    >
+      <ImgPopover />
+    </Modal>
+    < Header toggleClass={toggleClass} namberOfClass={namberOfClass}
+      bucket={props.bucket} />
 
-    <div className = 'siteBody' >
+    <div className='siteBody' >
 
-    < Route exact path = '/' component = {Home}/>
-    < Route  path = '/home' component = {Home}/>
-     < Route path = '/new' component = { New }/>
-     < Route path = '/FormComponent'component = {FormComponent }/>
-     < Route path = '/ChooseCollections' component = {ChooseCollections} />
-     < Route path = '/howToOrder' component = { HowToOrder } />
+      < Route exact path='/' component={Home} />
+      < Route path='/home' component={Home} />
+      < Route path='/new' component={New} />
+      < Route path='/FormComponent' component={FormComponent} />
+      < Route path='/ChooseCollections' component={ChooseCollections} />
+      < Route path='/howToOrder' component={HowToOrder} />
 
-    </div> 
-    < NavBar classNumber = { namberOfClass }  classTo1 = { classTo1 }/> 
-    < Confirm sendMessage = {sendComplit }/>
-     <div className = 'footer' >
-  
     </div>
-   </div>
+    < NavBar classNumber={namberOfClass} classTo1={classTo1} />
+    < Confirm sendMessage={sendComplit} />
+    <div className='footer' >
+
+    </div>
+  </div>
+}
+const mapStateToProps = (state) => {
+  let bucket = state.bucket
+  let order = state.oder
+  let popOpen = state.popOpen
+  let anchorEl = state.anchorEl
+
+  return {
+    bucket: bucket,
+    order: order,
+    anchorEl: anchorEl,
+    popOpen: popOpen,
+
   }
-  const mapStateToProps = (state) => {
-    let bucket = state.bucket
-    let order = state.oder
-    return {
-      bucket: bucket,
-      order: order
-    }
-  }
-  
-  export default connect(mapStateToProps)(Kuva)
+}
+
+export default connect(mapStateToProps)(Kuva)
