@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Reducer} from './reducers'
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
-import {BrowserRouter} from 'react-router-dom'
+import { Reducer } from './reduser/reducers'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 import Kuva from './App'
 
 
@@ -12,11 +12,11 @@ import Kuva from './App'
 //const sagaMiddleware = createSagaMiddleware()
 const store = createStore(Reducer)
 //sagaMiddleware.run(RootSaga,store)
-ReactDOM.render (
-        <Provider store={store}>
+ReactDOM.render(
+    <Provider store={store}>
         <BrowserRouter>
-        <Kuva/>
+            <Kuva />
         </BrowserRouter>
-        </Provider>
-        ,document.getElementById('root'))
-    //    
+    </Provider>
+    , document.getElementById('root'))
+    //
