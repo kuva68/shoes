@@ -22,6 +22,9 @@ const styles = makeStyles({
         justifyContent:'space-around',
         alignItems:'center'
         
+    },
+    typografy:{
+      textAlign:'center'
     }
 })
 export default function ImgPopover() {
@@ -47,8 +50,8 @@ export default function ImgPopover() {
         title={imgName}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-         {imgName}
+        <Typography gutterBottom variant="h5" component="div"className={classes.typografy}>
+         {imgName.replace('png','')}
         </Typography>
         
       </CardContent>
