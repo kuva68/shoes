@@ -15,7 +15,7 @@ const styles = makeStyles({
    },
     card:{
      height:'90%',
-     width:'auto'
+     minWidth:'30vw'
     },
     activeContainer:{
         display:'flex',

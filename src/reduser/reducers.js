@@ -64,7 +64,7 @@ export const Reducer = (state = {
 
 
         case 'img_obj':
-            console.log(action.obj)
+           // console.log(action.obj)
             return { ...state, imgList: action.obj, collectionsList: action.arr }
 
         default:
