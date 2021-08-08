@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,Suspense } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { Route } from 'react-router-dom'
 import Confirm from './components/Confirm'
@@ -14,8 +14,9 @@ import New from './New'
 import ModelBucket from './components/ModelBucket'
 import NavBarButton from './components/NavBarButton'
 import Modal from '@material-ui/core/Modal';
-import ImgPopover from './components/img_popover'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/styles';
+const  ImgPopover = React.lazy(()=>import('./components/img_popover'))
 const db = firebase.firestore()
 //const messaging = firebase.messaging()
 
@@ -29,60 +30,18 @@ const styles = makeStyles({
 })
 
 function Kuva(props) {
-  const classes = styles()
-  //console.log(firebase)
   const dispatch = useDispatch()
+  const classes = styles()
+  
   const [namberOfClass, setClass] = useState(0)
-  let { name, phoneNumber } = props.order
-  let bucket = props.bucket
-  const [send, setSend] = useState(false)
+  
   useEffect(() => {
     firebase.auth().signInAnonymously().catch((error) => {
       console.log(error)
     })
   }, [])
-  useEffect(() => {
-    async function sendMessage() {
-
-      try {
-        let messageToken =
-          localStorage.getItem('messageToken')
-        if (!messageToken) {
-          messageToken = ''
-        }
-        let nregEx = /[^a-z,A-Z,А-Я,а-я,\s]/gi
-        let regexName = name.replace(nregEx, 0)
-        let phone = phoneNumber
-        let d = new Date().toLocaleString()
-        let nowD = Date.now()
-
-        await db.collection('messages').doc(d)
-          .set({
-            name: regexName,
-            bucket: bucket,
-            phone: phone,
-            token: messageToken,
-            date: nowD,
-            status: 0
-          })
-
-        dispatch({
-          type: 'clear_bucket'
-        })
-        dispatch({
-          type: 'change_alert',
-          alert: 'confirmClose'
-        })
-        document.body.style.overflow = 'auto'
-        window.history.go(-1)
-        setSend(false)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    send && sendMessage()
-  }, [send, name, phoneNumber, bucket]
-  )
+  
+  
   //console.log(props)
 
   const toggleClass = () => {
@@ -92,6 +51,7 @@ function Kuva(props) {
   }
 
   useEffect(() => {
+    
     function getImgObj() {
       console.log('getImgObj start')
       if (!window.navigator.onLine) {
@@ -210,9 +170,7 @@ function Kuva(props) {
     //}
     // checkMessaging()
   }, [])
-  const sendComplit = () => {
-    setSend(true)
-  }
+ 
 
   const classTo1 = () => {
     setClass(0)
@@ -221,15 +179,18 @@ function Kuva(props) {
     namberOfClass === 2 ? document.body.style.overflow = 'hidden' :
       document.body.style.overflow = ''
   }, [namberOfClass])
-  const { popOpen, anchorEl } = props
+  const popOpen = props.popOpen
   return <div className='main' title='Кува взуття оптом Kuva' >
     <NavBarButton toggleClass={toggleClass} namberOfClass={namberOfClass} />
+    
     < ModelBucket bucket={props.bucket} />
     <Modal className={classes.modal}
       open={popOpen}
-
     >
+      <Suspense fallback={<div><CircularProgress/></div>}>
       <ImgPopover />
+      </Suspense>
+      
     </Modal>
     < Header toggleClass={toggleClass} namberOfClass={namberOfClass}
       bucket={props.bucket} />
@@ -245,7 +206,7 @@ function Kuva(props) {
 
     </div>
     < NavBar classNumber={namberOfClass} classTo1={classTo1} />
-    < Confirm sendMessage={sendComplit} />
+    < Confirm  />
     <div className='footer' >
 
     </div>

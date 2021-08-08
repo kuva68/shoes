@@ -21,13 +21,13 @@ export default function* RootSaga(store){
    // yield takeLatest('SEND_MESSAGE',sendMessage,store)
     
     //yield spawn(getImgObj)
-   yield spawn(checkMessaging)
+  // yield spawn(checkMessaging)
 }
 
 
 
     
-     //console.log( storageRef.child('19 spring/171м9 ч напл 24.3$.png').getDownloadURL())
+    
     
 
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router'
+import useFirebase from '../sagas/useFirebase'
 const AlertOderedModelComponent = (props) => {
 
     return <div className='AlertoderedModelComponent'>
@@ -28,6 +30,8 @@ const AlertOderedModelComponent = (props) => {
 }
 
 function Confirm(props) {
+    const history = useHistory()
+    const firebaseApi = useFirebase()
     const [message, setMessage] = useState(0)
     let { name, phoneNumber } = props.order
     let sendMessage = props.sendMessage
@@ -56,6 +60,32 @@ function Confirm(props) {
         Object.keys(props.bucket).length > 0) {
         bucketArr = Object.keys(props.bucket)
     }
+    const runFetch = ()=>{
+        let messageToken
+        try{
+            messageToken =
+            localStorage.getItem('messageToken')
+          if (!messageToken) {
+            messageToken = ''  
+        }
+        }catch(error){console.log(error)}
+        let nregEx = /[^a-z,A-Z,А-Я,а-я,\s]/gi
+        let regexName = name.replace(nregEx, 0)
+        let phone = phoneNumber
+        let d = new Date().toLocaleString()
+        let nowD = Date.now()
+        let obj = {name: regexName,
+        bucket: props.bucket,
+        phone: phone,
+        token: messageToken,
+        date: nowD,
+        status: 0}
+
+        document.body.style.overflow = 'auto'
+        history.go(-1)
+
+        return firebaseApi({collection:'messages',doc:d,objToFetch:obj})
+    }
     return <div className={props.alert}>
         <div className='confirmBody'>
             <h3 style={{ margin: '0px', textAlign: 'center' }}>
@@ -74,9 +104,8 @@ function Confirm(props) {
                     document.body.style.overflow = 'auto'
                     props.dispatch({ type: 'change_alert', alert: 'confirmClose' })
                 }}>Назад</div>
-                <div className='confirmButton' onClick={
-                    () => { setMessage(1) }
-                }>ЗАКАЗАТЬ</div>
+                <div className='confirmButton' onClick={runFetch}                  
+                >ЗАКАЗАТЬ</div>
             </div>
         </div>
     </div>
